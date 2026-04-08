@@ -1,0 +1,58 @@
+---
+title: GooeyToaster
+---
+
+import { Callout } from "nextra/components";
+
+# GooeyToaster
+
+The `GooeyToaster` renders the morphing blob toast overlay. Place it **once** near the root of your app, inside `ThemeProvider`.
+
+```tsx
+import { ThemeProvider, GooeyToaster } from "@gooey/core";
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <YourApp />
+      <GooeyToaster />
+    </ThemeProvider>
+  );
+}
+```
+
+<Callout>
+  Only mount one `GooeyToaster` per app. Multiple instances will cause duplicate toasts.
+</Callout>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `TGooeyToastPosition` | `"bottom-center"` | Where toasts appear on screen |
+| `maxToasts` | `number` | `3` | Max visible toasts at once |
+| `defaultDuration` | `number` | `4000` | Auto-dismiss time in ms |
+| `defaultShowTimestamp` | `boolean` | `false` | Show elapsed time on toasts |
+| `theme` | `ITheme` | inherited | Override the theme for toasts only |
+
+## Position values
+
+```ts
+type TGooeyToastPosition =
+  | "top-left" | "top-center" | "top-right"
+  | "bottom-left" | "bottom-center" | "bottom-right";
+```
+
+## Examples
+
+### Custom position
+
+```tsx
+<GooeyToaster position="top-center" />
+```
+
+### Limit stack height
+
+```tsx
+<GooeyToaster maxToasts={5} defaultDuration={3000} />
+```

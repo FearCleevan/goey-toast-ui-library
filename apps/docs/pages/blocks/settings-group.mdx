@@ -1,0 +1,70 @@
+---
+title: SettingsGroup
+---
+
+# SettingsGroup
+
+A grouped settings section rendered as a Card. Supports navigation rows (with chevron), toggle rows (with Switch), and info rows (display-only).
+
+## Usage
+
+```tsx
+import { SettingsGroup } from "@gooey/blocks";
+
+<SettingsGroup
+  title="Account"
+  rows={[
+    {
+      label: "Edit profile",
+      type: "navigate",
+      onPress: () => router.push("/profile/edit"),
+    },
+    {
+      label: "Change password",
+      type: "navigate",
+      onPress: () => router.push("/password"),
+    },
+    {
+      label: "Two-factor auth",
+      type: "toggle",
+      checked: twoFactorEnabled,
+      onToggle: setTwoFactorEnabled,
+    },
+    {
+      label: "App version",
+      type: "info",
+      value: "1.0.0",
+    },
+  ]}
+/>
+```
+
+## Row types
+
+| Type | Trailing element | Props |
+|---|---|---|
+| `"navigate"` | Chevron icon | `onPress` |
+| `"toggle"` | `Switch` | `checked`, `onToggle` |
+| `"info"` | Value text | `value` |
+
+## Props
+
+### SettingsGroup
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Group heading |
+| `rows` | `ISettingsRowProps[]` | Row definitions |
+| `style` | `StyleProp<ViewStyle>` | Container style |
+
+### ISettingsRowProps
+
+| Prop | Type | Description |
+|---|---|---|
+| `label` | `string` | Row label |
+| `type` | `"navigate" \| "toggle" \| "info"` | Row variant |
+| `onPress` | `() => void` | Navigate row press handler |
+| `checked` | `boolean` | Toggle row state |
+| `onToggle` | `(value: boolean) => void` | Toggle row change handler |
+| `value` | `string` | Info row display value |
+| `icon` | `ReactNode` | Optional leading icon |

@@ -1,0 +1,86 @@
+---
+title: gooeyToast
+---
+
+# gooeyToast
+
+The imperative API for firing toasts from anywhere — no hooks, no context required.
+
+## Methods
+
+```ts
+gooeyToast(title, options?)           // default (info) toast
+gooeyToast.success(title, options?)
+gooeyToast.error(title, options?)
+gooeyToast.warning(title, options?)
+gooeyToast.info(title, options?)
+gooeyToast.promise(promise, messages)
+gooeyToast.update(id, options)
+gooeyToast.dismiss(id?)              // dismiss one or all
+```
+
+Each call returns the toast `id` (string).
+
+## Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `description` | `string` | — | Secondary text below the title |
+| `duration` | `number` | `4000` | Auto-dismiss in ms. `Infinity` to persist |
+| `icon` | `ReactNode` | — | Custom icon, replaces the type icon |
+| `action` | `{ label, onPress }` | — | Action button shown on the toast |
+| `dismissible` | `boolean` | `true` | Whether the user can swipe to dismiss |
+| `showTimestamp` | `boolean` | `false` | Show elapsed time label |
+| `id` | `string` | auto | Provide a fixed ID to deduplicate |
+
+## Examples
+
+### Basic variants
+
+```ts
+gooeyToast.success("Saved!");
+gooeyToast.error("Something went wrong", { description: "Check your network." });
+gooeyToast.warning("Low storage", { duration: 6000 });
+gooeyToast.info("Update available");
+```
+
+### With action button
+
+```ts
+gooeyToast("File deleted", {
+  description: "invoice.pdf",
+  action: {
+    label: "Undo",
+    onPress: () => restoreFile(),
+  },
+  duration: 6000,
+});
+```
+
+### Promise toast
+
+```ts
+gooeyToast.promise(uploadFile(), {
+  loading: "Uploading…",
+  success: (data) => `Uploaded ${data.name}`,
+  error: (err) => err.message,
+});
+```
+
+### Update an existing toast
+
+```ts
+const id = gooeyToast("Processing…", { duration: Infinity });
+
+// later…
+gooeyToast.update(id, { title: "Done!", type: "success", duration: 3000 });
+```
+
+### Dismiss
+
+```ts
+const id = gooeyToast.info("Running…", { duration: Infinity });
+gooeyToast.dismiss(id);   // dismiss one
+
+gooeyToast.dismiss();     // dismiss all
+```

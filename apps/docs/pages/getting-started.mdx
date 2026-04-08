@@ -1,0 +1,89 @@
+---
+title: Getting Started
+---
+
+import { Steps, Callout } from "nextra/components";
+
+# Getting Started
+
+<Steps>
+
+### Install `@gooey/core`
+
+```bash
+npx expo install @gooey/core react-native-reanimated
+```
+
+<Callout type="info">
+  goey-toast requires **React Native Reanimated ≥ 3** for the morphing blob animation. Expo projects should use `npx expo install` so the correct version for your SDK is selected automatically.
+</Callout>
+
+### Add the Babel plugin
+
+In `babel.config.js` (Expo projects):
+
+```js
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: ["babel-preset-expo"],
+    plugins: ["react-native-reanimated/plugin"],
+  };
+};
+```
+
+### Wrap your root with `ThemeProvider` and `GooeyToaster`
+
+```tsx filename="app/_layout.tsx"
+import { ThemeProvider, GooeyToaster } from "@gooey/core";
+
+export default function RootLayout({ children }) {
+  return (
+    <ThemeProvider>
+      {children}
+      <GooeyToaster />
+    </ThemeProvider>
+  );
+}
+```
+
+### Fire your first toast
+
+```tsx
+import { gooeyToast } from "@gooey/core";
+
+// Anywhere in your app
+gooeyToast.success("You're all set!", {
+  description: "goey-toast is working.",
+});
+```
+
+</Steps>
+
+## Dark mode
+
+Pass a custom theme or the built-in `darkTheme`:
+
+```tsx
+import { ThemeProvider, darkTheme } from "@gooey/core";
+
+<ThemeProvider theme={darkTheme}>
+  {/* ... */}
+</ThemeProvider>
+```
+
+Or create your own with `createTheme`:
+
+```tsx
+import { createTheme } from "@gooey/core";
+
+const brandTheme = createTheme({
+  colors: {
+    primary: "#6C47FF",
+  },
+});
+```
+
+## TypeScript
+
+All packages ship full TypeScript declarations — no `@types/*` needed.

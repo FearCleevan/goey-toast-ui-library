@@ -1,0 +1,34 @@
+{
+  "name": "@gooey/cli",
+  "version": "0.1.0",
+  "description": "CLI to add Gooey UI components to your React Native project",
+  "keywords": [
+    "react-native",
+    "expo",
+    "cli",
+    "ui",
+    "gooey"
+  ],
+  "license": "MIT",
+  "bin": {
+    "gooey": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@gooey/tsconfig": "workspace:*",
+    "@types/node": "^25.5.2",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.2"
+  }
+}

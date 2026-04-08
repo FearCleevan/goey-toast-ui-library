@@ -1,0 +1,52 @@
+---
+title: SignInBlock
+---
+
+# SignInBlock
+
+A complete sign-in form with email/password fields, loading state, optional "Forgot password" and "Sign up" links, and automatic `gooeyToast` feedback.
+
+## Usage
+
+```tsx
+import { SignInBlock } from "@gooey/blocks";
+
+<SignInBlock
+  onSignIn={async (email, password) => {
+    await auth.signIn(email, password);
+  }}
+  onForgotPassword={() => router.push("/forgot-password")}
+  onSignUp={() => router.push("/sign-up")}
+/>
+```
+
+## With logo
+
+```tsx
+import { SignInBlock } from "@gooey/blocks";
+import { Image } from "react-native";
+
+<SignInBlock
+  onSignIn={handleSignIn}
+  logo={<Image source={require("./logo.png")} style={{ width: 120, height: 40 }} />}
+/>
+```
+
+## Toast behavior
+
+| Event | Toast |
+|---|---|
+| Missing fields | `gooeyToast.warning("Missing fields")` |
+| Success | `gooeyToast.success("Signed in")` |
+| Error (thrown) | `gooeyToast.error("Sign in failed", { description: err.message })` |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `onSignIn` | `(email, password) => Promise<void> \| void` | — | Submit handler. Throw to show error toast. |
+| `onForgotPassword` | `() => void` | — | "Forgot password?" link press |
+| `onSignUp` | `() => void` | — | "Sign up" link press |
+| `logo` | `ReactNode` | — | Logo/wordmark slot above the form |
+| `submitLabel` | `string` | `"Sign in"` | Submit button label |
+| `disableToast` | `boolean` | `false` | Suppress automatic toasts |

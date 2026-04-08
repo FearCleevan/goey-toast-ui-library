@@ -1,0 +1,27 @@
+{
+  "name": "gooey-ui",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "demo": "turbo dev --filter=expo-demo",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo build --filter=@gooey/* && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.12",
+    "turbo": "^2.5.4",
+    "typescript": "~5.9.2"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "unrs-resolver"]
+  }
+}

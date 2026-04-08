@@ -1,0 +1,54 @@
+---
+title: ProfileHeader
+---
+
+# ProfileHeader
+
+A user profile header with avatar, name, username, an optional edit button, and optional stats row (followers, posts, etc.).
+
+## Usage
+
+```tsx
+import { ProfileHeader } from "@gooey/blocks";
+
+<ProfileHeader
+  name="Jane Smith"
+  username="janesmith"
+  avatarUri="https://example.com/jane.jpg"
+  stats={[
+    { label: "Posts", value: "142" },
+    { label: "Followers", value: "3.8K" },
+    { label: "Following", value: "219" },
+  ]}
+  onEditPress={() => router.push("/profile/edit")}
+/>
+```
+
+## Without edit button
+
+```tsx
+<ProfileHeader
+  name="Jane Smith"
+  username="janesmith"
+  showEditButton={false}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `name` | `string` | — | Display name (also used for avatar initials) |
+| `username` | `string` | — | Handle shown as `@username` |
+| `avatarUri` | `string` | — | Avatar image URI |
+| `stats` | `IProfileStat[]` | — | Stats displayed in a row below a divider |
+| `onEditPress` | `() => void` | — | Edit button press handler |
+| `showEditButton` | `boolean` | `true` | Whether to show the edit button |
+| `style` | `StyleProp<ViewStyle>` | — | Container style |
+
+## IProfileStat
+
+| Field | Type | Description |
+|---|---|---|
+| `label` | `string` | Stat label (e.g. "Followers") |
+| `value` | `string` | Stat value (e.g. "3.8K") |

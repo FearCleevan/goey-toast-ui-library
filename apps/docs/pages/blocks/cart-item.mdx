@@ -1,0 +1,39 @@
+---
+title: CartItem
+---
+
+# CartItem
+
+A shopping cart row with quantity stepper and remove button. Fires a toast on removal.
+
+## Usage
+
+```tsx
+import { CartItem } from "@gooey/blocks";
+
+<CartItem
+  name="Wireless Headphones"
+  price="$149.99"
+  quantity={2}
+  imageUri="https://example.com/headphones.jpg"
+  onQuantityChange={(qty) => cart.updateQty(id, qty)}
+  onRemove={() => cart.remove(id)}
+/>
+```
+
+## Toast on remove
+
+Pressing the remove button fires: `gooeyToast.warning("Item removed", { description: name })`
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `name` | `string` | Product name |
+| `price` | `string` | Item price (formatted) |
+| `quantity` | `number` | Current quantity |
+| `imageUri` | `string` | Product image URI |
+| `onQuantityChange` | `(qty: number) => void` | Called when stepper changes |
+| `onRemove` | `() => void` | Called when remove is pressed |
+| `disableToast` | `boolean` | Suppress remove toast |
+| `style` | `StyleProp<ViewStyle>` | Container style |

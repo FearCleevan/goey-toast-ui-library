@@ -1,0 +1,38 @@
+{
+  "name": "@gooey/blocks",
+  "version": "0.1.0",
+  "description": "Pre-built screen blocks for Gooey UI — auth, onboarding, dashboard, e-commerce, settings",
+  "keywords": ["react-native", "expo", "ui", "blocks", "screens", "gooey"],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gooey/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.74",
+    "react-native-reanimated": ">=3.0.0",
+    "react-native-safe-area-context": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@gooey/tsconfig": "workspace:*",
+    "@types/react": "~19.2.2",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.2"
+  }
+}

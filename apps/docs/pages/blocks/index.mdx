@@ -1,0 +1,33 @@
+---
+title: "@gooey/blocks"
+---
+
+# @gooey/blocks
+
+Pre-built screen compositions for common mobile app patterns — auth, onboarding, dashboard, e-commerce, and settings.
+
+## Install
+
+```bash
+pnpm add @gooey/blocks @gooey/core
+```
+
+All blocks are built exclusively from `@gooey/core` primitives and integrate `gooeyToast` feedback automatically.
+
+## Categories
+
+| Category | Blocks |
+|---|---|
+| **Auth** | `SignInBlock`, `SignUpBlock` |
+| **Onboarding** | `OnboardingFlow` |
+| **Dashboard** | `StatsCard`, `ActivityFeed` |
+| **E-commerce** | `ProductCard`, `CartItem` |
+| **Settings** | `SettingsGroup`, `ProfileHeader` |
+
+## disableToast prop
+
+Every block that fires toasts accepts a `disableToast` prop. Set it to `true` to suppress all automatic `gooeyToast` calls (useful in tests or when you want full control):
+
+```tsx
+<SignInBlock onSignIn={handleSignIn} disableToast />
+```

@@ -1,0 +1,39 @@
+{
+  "name": "@gooey/charts",
+  "version": "0.1.0",
+  "description": "Chart components for Gooey UI — powered by Victory Native and react-native-svg",
+  "keywords": ["react-native", "expo", "charts", "victory-native", "ui"],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@gooey/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.74",
+    "react-native-svg": ">=15.0.0",
+    "victory-native": ">=36.0.0"
+  },
+  "devDependencies": {
+    "@gooey/tsconfig": "workspace:*",
+    "@types/react": "~19.2.2",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.2",
+    "victory-native": "^36.8.0"
+  }
+}

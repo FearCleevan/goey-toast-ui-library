@@ -1,0 +1,39 @@
+---
+title: SignUpBlock
+---
+
+# SignUpBlock
+
+A complete sign-up form with name, email, and password fields. Validates required fields and minimum password length before calling your handler.
+
+## Usage
+
+```tsx
+import { SignUpBlock } from "@gooey/blocks";
+
+<SignUpBlock
+  onSignUp={async ({ name, email, password }) => {
+    await auth.createAccount({ name, email, password });
+  }}
+  onSignIn={() => router.push("/sign-in")}
+/>
+```
+
+## Toast behavior
+
+| Event | Toast |
+|---|---|
+| Missing fields | `gooeyToast.warning("Missing fields")` |
+| Password < 8 chars | `gooeyToast.warning("Password too short")` |
+| Success | `gooeyToast.success("Account created", { description: "Welcome, {name}!" })` |
+| Error (thrown) | `gooeyToast.error("Sign up failed", { description: err.message })` |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `onSignUp` | `(data: ISignUpData) => Promise<void> \| void` | — | Submit handler. `ISignUpData = { name, email, password }` |
+| `onSignIn` | `() => void` | — | "Already have an account?" link press |
+| `logo` | `ReactNode` | — | Logo slot above the form |
+| `submitLabel` | `string` | `"Create account"` | Submit button label |
+| `disableToast` | `boolean` | `false` | Suppress automatic toasts |

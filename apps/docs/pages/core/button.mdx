@@ -1,0 +1,72 @@
+---
+title: Button
+---
+
+# Button
+
+A pressable button with variants, sizes, loading state, and icon slots.
+
+## Usage
+
+```tsx
+import { Button } from "@gooey/core";
+
+<Button onPress={() => console.log("pressed")}>
+  Save changes
+</Button>
+```
+
+## Variants
+
+```tsx
+<Button variant="default">Default</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Delete</Button>
+<Button variant="link">Learn more</Button>
+```
+
+## Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+```
+
+## Loading state
+
+```tsx
+<Button loading>Saving…</Button>
+```
+
+## Icons
+
+```tsx
+import { PlusIcon } from "your-icon-library";
+
+<Button leftIcon={<PlusIcon />}>Add item</Button>
+<Button rightIcon={<ChevronRightIcon />}>Next</Button>
+```
+
+## Custom color
+
+```tsx
+<Button color="#6C47FF">Brand action</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `ReactNode` | — | Button label content |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "link"` | `"default"` | Visual style |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset |
+| `color` | `string` | — | Override background/text color |
+| `loading` | `boolean` | `false` | Show spinner, disable interaction |
+| `disabled` | `boolean` | `false` | Disable interaction |
+| `leftIcon` | `ReactNode` | — | Icon before label |
+| `rightIcon` | `ReactNode` | — | Icon after label |
+| `onPress` | `() => void` | — | Press handler |
+| `style` | `StyleProp<ViewStyle>` | — | Container style override |
+| `accessibilityLabel` | `string` | — | Screen reader label |

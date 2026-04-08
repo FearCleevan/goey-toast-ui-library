@@ -1,0 +1,39 @@
+---
+title: Avatar
+---
+
+# Avatar
+
+Displays a user avatar — image with fallback to initials.
+
+## Usage
+
+```tsx
+import { Avatar } from "@gooey/core";
+
+// With image
+<Avatar name="Jane Smith" src="https://example.com/jane.jpg" size="md" />
+
+// Initials fallback
+<Avatar name="Jane Smith" size="lg" />
+```
+
+## Sizes
+
+```tsx
+<Avatar name="A" size="xs" />   // 24
+<Avatar name="A" size="sm" />   // 32
+<Avatar name="A" size="md" />   // 40
+<Avatar name="A" size="lg" />   // 48
+<Avatar name="A" size="xl" />   // 56
+<Avatar name="A" size="2xl" />  // 72
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `name` | `string` | — | Used for initials fallback and accessibility |
+| `src` | `string` | — | Image URI |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl"` | `"md"` | Avatar size |
+| `style` | `StyleProp<ViewStyle>` | — | Container style override |

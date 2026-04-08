@@ -1,0 +1,12 @@
+{
+  "extends": "@gooey/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}

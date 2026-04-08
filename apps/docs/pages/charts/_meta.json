@@ -1,0 +1,9 @@
+{
+  "index": "Overview",
+  "bar-chart": "BarChart",
+  "line-chart": "LineChart",
+  "area-chart": "AreaChart",
+  "pie-chart": "PieChart",
+  "donut-chart": "DonutChart",
+  "chart-tooltip": "ChartTooltip"
+}
