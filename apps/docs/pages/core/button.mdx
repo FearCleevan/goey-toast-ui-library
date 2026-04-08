@@ -19,11 +19,9 @@ import { Button } from "@gooey/core";
 ## Variants
 
 ```tsx
-<Button variant="default">Default</Button>
+<Button variant="solid">Solid (default)</Button>
 <Button variant="outline">Outline</Button>
 <Button variant="ghost">Ghost</Button>
-<Button variant="destructive">Delete</Button>
-<Button variant="link">Learn more</Button>
 ```
 
 ## Sizes
@@ -60,7 +58,7 @@ import { PlusIcon } from "your-icon-library";
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `children` | `ReactNode` | — | Button label content |
-| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "link"` | `"default"` | Visual style |
+| `variant` | `"solid" \| "outline" \| "ghost"` | `"solid"` | Visual style |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset |
 | `color` | `string` | — | Override background/text color |
 | `loading` | `boolean` | `false` | Show spinner, disable interaction |

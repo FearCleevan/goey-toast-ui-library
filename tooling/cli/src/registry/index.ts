@@ -1,9 +1,15 @@
+import { alertTemplate } from "./templates/alert";
 import { badgeTemplate } from "./templates/badge";
+import { bottomSheetTemplate } from "./templates/bottom-sheet";
 import { buttonTemplate } from "./templates/button";
 import { cardTemplate } from "./templates/card";
 import { checkboxTemplate } from "./templates/checkbox";
+import { chipTemplate } from "./templates/chip";
+import { iconButtonTemplate } from "./templates/icon-button";
 import { inputTemplate } from "./templates/input";
 import { modalTemplate } from "./templates/modal";
+import { skeletonTemplate } from "./templates/skeleton";
+import { switchTemplate } from "./templates/switch";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -71,6 +77,58 @@ const REGISTRY: RegistryEntry[] = [
     peerDeps: ["react-native-reanimated"],
     fileName: "Checkbox.tsx",
     template: checkboxTemplate,
+  },
+  {
+    name: "switch",
+    description: "Animated toggle switch with size variants and optional label",
+    tier: 2,
+    peerDeps: ["react-native-reanimated"],
+    fileName: "Switch.tsx",
+    template: switchTemplate,
+  },
+  {
+    name: "chip",
+    description: "Selectable pill chip with selected state and optional leading icon",
+    tier: 2,
+    peerDeps: ["react-native-reanimated"],
+    fileName: "Chip.tsx",
+    template: chipTemplate,
+  },
+  {
+    name: "icon-button",
+    description: "Square or circle icon-only button with solid, outline, and ghost variants",
+    tier: 2,
+    peerDeps: ["react-native-reanimated"],
+    fileName: "IconButton.tsx",
+    template: iconButtonTemplate,
+  },
+  {
+    name: "alert",
+    description: "Inline alert banner with toast-type color variants and optional close button",
+    tier: 1,
+    peerDeps: [],
+    fileName: "Alert.tsx",
+    template: alertTemplate,
+  },
+  {
+    name: "skeleton",
+    description: "Pulsing placeholder skeleton for loading states",
+    tier: 2,
+    peerDeps: ["react-native-reanimated"],
+    fileName: "Skeleton.tsx",
+    template: skeletonTemplate,
+  },
+  {
+    name: "bottom-sheet",
+    description: "Gesture-driven bottom sheet with snap point and backdrop dismiss",
+    tier: 3,
+    peerDeps: [
+      "react-native-reanimated",
+      "react-native-gesture-handler",
+      "react-native-safe-area-context",
+    ],
+    fileName: "BottomSheet.tsx",
+    template: bottomSheetTemplate,
   },
 ];
 
