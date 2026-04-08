@@ -1,0 +1,12 @@
+{
+  "index": "Overview",
+  "sign-in": "SignInBlock",
+  "sign-up": "SignUpBlock",
+  "onboarding": "OnboardingFlow",
+  "stats-card": "StatsCard",
+  "activity-feed": "ActivityFeed",
+  "product-card": "ProductCard",
+  "cart-item": "CartItem",
+  "settings-group": "SettingsGroup",
+  "profile-header": "ProfileHeader"
+}

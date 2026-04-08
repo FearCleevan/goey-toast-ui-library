@@ -1,0 +1,7 @@
+{
+  "index": "Overview",
+  "init": "gooey init",
+  "add": "gooey add",
+  "list": "gooey list",
+  "diff": "gooey diff"
+}

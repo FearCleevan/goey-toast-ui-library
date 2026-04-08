@@ -1,0 +1,47 @@
+---
+title: gooey init
+---
+
+# gooey init
+
+Initializes goey-toast in your project. Run this once before using `gooey add`.
+
+## Usage
+
+```bash
+gooey init
+```
+
+## What it does
+
+1. **Detects your environment** — Expo SDK version, package manager (bun/pnpm/yarn/npm)
+2. **Prompts for output directory** — where components will be copied (default: `src/components/gooey`)
+3. **Installs `@gooey/core`** — using the correct install command for your setup
+4. **Writes `gooey.config.json`** — stores your preferences for future commands
+5. **Prints a setup snippet** — `ThemeProvider` + `GooeyToaster` wrapper code to add to your app
+
+## Example output
+
+```
+◆ goey-toast init
+  Expo SDK 52 detected
+  Package manager: pnpm
+
+  Output directory: src/components/gooey
+
+  Installing @gooey/core…
+  ✔ Done
+
+  Add this to your root layout:
+
+  import { ThemeProvider, GooeyToaster } from "@gooey/core";
+
+  export default function RootLayout({ children }) {
+    return (
+      <ThemeProvider>
+        {children}
+        <GooeyToaster />
+      </ThemeProvider>
+    );
+  }
+```

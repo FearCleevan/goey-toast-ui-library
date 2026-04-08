@@ -34,6 +34,7 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
@@ -43,3 +44,18 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Turborepo
+.turbo/
+
+# Build outputs (packages build to dist/ via tsup, not committed)
+packages/*/dist/
+tooling/*/dist/
+
+# Claude Code
+.claude/settings.local.json

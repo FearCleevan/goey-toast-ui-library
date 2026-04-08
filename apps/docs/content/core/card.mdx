@@ -1,0 +1,36 @@
+---
+title: Card
+---
+
+# Card
+
+A surface container with themed background, border, radius, and optional press handling.
+
+## Usage
+
+```tsx
+import { Card, Text, VStack } from "@gooey/core";
+
+<Card>
+  <VStack gap={8}>
+    <Text weight="bold">Card title</Text>
+    <Text size="sm">Card body content goes here.</Text>
+  </VStack>
+</Card>
+```
+
+## Pressable card
+
+```tsx
+<Card onPress={() => router.push("/detail")}>
+  <Text>Tap me</Text>
+</Card>
+```
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `children` | `ReactNode` | Card content |
+| `onPress` | `() => void` | Makes the card pressable |
+| `style` | `StyleProp<ViewStyle>` | Container style override |

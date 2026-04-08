@@ -1,0 +1,66 @@
+---
+title: BarChart
+---
+
+# BarChart
+
+A vertical bar chart with themed axes, gridlines, and optional press/tooltip interaction.
+
+## Usage
+
+```tsx
+import { BarChart } from "@gooey/charts";
+
+const data = [
+  { x: "Mon", y: 120 },
+  { x: "Tue", y: 85 },
+  { x: "Wed", y: 200 },
+  { x: "Thu", y: 160 },
+  { x: "Fri", y: 95 },
+];
+
+<BarChart data={data} height={240} />
+```
+
+## With press callback
+
+```tsx
+<BarChart
+  data={data}
+  height={240}
+  onPress={(datum) => console.log("Tapped:", datum)}
+/>
+```
+
+## With toast tooltip
+
+```tsx
+<BarChart
+  data={data}
+  height={240}
+  toastConfig={{
+    titleKey: "x",
+    descriptionKey: "y",
+    duration: 2800,
+  }}
+/>
+```
+
+## Custom color
+
+```tsx
+<BarChart data={data} height={240} color="#6C47FF" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `data` | `Array<{ x: string \| number; y: number }>` | — | Chart data points |
+| `height` | `number` | `240` | Chart height in px |
+| `color` | `string` | theme blue | Bar fill color |
+| `onPress` | `(datum) => void` | — | Called when a bar is tapped |
+| `toastConfig` | `IChartToastConfig` | — | Show a gooeyToast on hover/press |
+| `showGrid` | `boolean` | `true` | Show horizontal grid lines |
+| `yAxisLabel` | `string` | — | Y-axis label |
+| `style` | `StyleProp<ViewStyle>` | — | Container style |

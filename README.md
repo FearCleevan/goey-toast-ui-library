@@ -8,12 +8,12 @@ https://github.com/user-attachments/assets/ed0c75b8-3ee3-43b3-8e24-eec3f25c5135
 
 ## What's inside
 
-| Package | Description |
-|---|---|
-| `@gooey/core` | Toast system, theming engine, and 20+ animated components |
-| `@gooey/charts` | BarChart, LineChart, AreaChart, PieChart, DonutChart |
+| Package         | Description                                                                |
+| --------------- | -------------------------------------------------------------------------- |
+| `@gooey/core`   | Toast system, theming engine, and 20+ animated components                  |
+| `@gooey/charts` | BarChart, LineChart, AreaChart, PieChart, DonutChart                       |
 | `@gooey/blocks` | Pre-built screen blocks: Auth, Onboarding, Dashboard, E-commerce, Settings |
-| `@gooey/cli` | shadcn-style component installer — `gooey add button` |
+| `@gooey/cli`    | shadcn-style component installer — `gooey add button`                      |
 
 ---
 
@@ -113,7 +113,7 @@ npx @gooey/cli init
 
 ```bash
 # 1. Clone
-git clone https://github.com/your-org/goey-toast
+git clone https://github.com/FearCleevan/goey-toast-ui-library
 cd goey-toast
 
 # 2. Install all workspace deps from the root (do NOT cd into sub-folders first)
@@ -173,36 +173,36 @@ gooeyToast("File deleted", {
 const id = gooeyToast("Processing…", { duration: Infinity });
 
 gooeyToast.update(id, { title: "Done!", type: "success", duration: 3000 });
-gooeyToast.dismiss(id);   // one
-gooeyToast.dismiss();     // all
+gooeyToast.dismiss(id); // one
+gooeyToast.dismiss(); // all
 ```
 
 ---
 
 ## GooeyToaster props
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `position` | `"top-left" \| "top-center" \| "top-right" \| "bottom-left" \| "bottom-center" \| "bottom-right"` | `"bottom-center"` | Toast stack position |
-| `maxToasts` | `number` | `3` | Max visible toasts |
-| `defaultDuration` | `number` | `4000` | Auto-dismiss in ms |
-| `defaultShowTimestamp` | `boolean` | `false` | Show elapsed time label |
-| `theme` | `ITheme` | inherited | Override theme for toasts only |
+| Prop                   | Type                                                                                              | Default           | Description                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------- | ----------------- | ------------------------------ |
+| `position`             | `"top-left" \| "top-center" \| "top-right" \| "bottom-left" \| "bottom-center" \| "bottom-right"` | `"bottom-center"` | Toast stack position           |
+| `maxToasts`            | `number`                                                                                          | `3`               | Max visible toasts             |
+| `defaultDuration`      | `number`                                                                                          | `4000`            | Auto-dismiss in ms             |
+| `defaultShowTimestamp` | `boolean`                                                                                         | `false`           | Show elapsed time label        |
+| `theme`                | `ITheme`                                                                                          | inherited         | Override theme for toasts only |
 
 ---
 
 ## gooeyToast options
 
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `description` | `string` | — | Secondary text below title |
-| `duration` | `number` | `4000` | Auto-dismiss in ms. `Infinity` to persist |
-| `icon` | `ReactNode` | — | Custom icon (replaces type icon) |
-| `action` | `{ label: string; onPress: () => void }` | — | Action button |
-| `dismissible` | `boolean` | `true` | Swipe-to-dismiss |
-| `showTimestamp` | `boolean` | `false` | Elapsed time label |
-| `id` | `string` | auto | Fixed ID for deduplication |
-| `type` | `"default" \| "success" \| "error" \| "warning" \| "info"` | `"default"` | Toast variant |
+| Option          | Type                                                       | Default     | Description                               |
+| --------------- | ---------------------------------------------------------- | ----------- | ----------------------------------------- |
+| `description`   | `string`                                                   | —           | Secondary text below title                |
+| `duration`      | `number`                                                   | `4000`      | Auto-dismiss in ms. `Infinity` to persist |
+| `icon`          | `ReactNode`                                                | —           | Custom icon (replaces type icon)          |
+| `action`        | `{ label: string; onPress: () => void }`                   | —           | Action button                             |
+| `dismissible`   | `boolean`                                                  | `true`      | Swipe-to-dismiss                          |
+| `showTimestamp` | `boolean`                                                  | `false`     | Elapsed time label                        |
+| `id`            | `string`                                                   | auto        | Fixed ID for deduplication                |
+| `type`          | `"default" \| "success" \| "error" \| "warning" \| "info"` | `"default"` | Toast variant                             |
 
 ---
 
@@ -212,13 +212,13 @@ gooeyToast.dismiss();     // all
 import { createTheme, ThemeProvider, darkTheme } from "@gooey/core";
 
 // Use built-in dark theme
-<ThemeProvider theme={darkTheme}>{/* … */}</ThemeProvider>
+<ThemeProvider theme={darkTheme}>{/* … */}</ThemeProvider>;
 
 // Create a brand theme (deep-merges with lightTheme)
 const brandTheme = createTheme({
   colors: { primary: "#6C47FF" },
 });
-<ThemeProvider theme={brandTheme}>{/* … */}</ThemeProvider>
+<ThemeProvider theme={brandTheme}>{/* … */}</ThemeProvider>;
 ```
 
 Access tokens anywhere with `useTheme`:
@@ -234,17 +234,17 @@ const theme = useTheme();
 
 ## Components (from @gooey/core)
 
-| Category | Components |
-|---|---|
-| Toast | `GooeyToaster`, `gooeyToast`, `removeToast`, `dismissAll` |
-| Layout | `Box`, `HStack`, `VStack`, `Divider` |
-| Typography | `Text` |
-| Inputs | `Button`, `IconButton`, `Input`, `Switch`, `Checkbox` |
-| Display | `Avatar`, `Badge`, `Card`, `Chip`, `Alert` |
-| Overlays | `Modal`, `BottomSheet` |
-| Feedback | `Skeleton` |
-| Theme | `ThemeProvider`, `useTheme`, `createTheme`, `lightTheme`, `darkTheme` |
-| Tokens | `palette`, `radius`, `spacing`, `typography`, `motion` |
+| Category   | Components                                                            |
+| ---------- | --------------------------------------------------------------------- |
+| Toast      | `GooeyToaster`, `gooeyToast`, `removeToast`, `dismissAll`             |
+| Layout     | `Box`, `HStack`, `VStack`, `Divider`                                  |
+| Typography | `Text`                                                                |
+| Inputs     | `Button`, `IconButton`, `Input`, `Switch`, `Checkbox`                 |
+| Display    | `Avatar`, `Badge`, `Card`, `Chip`, `Alert`                            |
+| Overlays   | `Modal`, `BottomSheet`                                                |
+| Feedback   | `Skeleton`                                                            |
+| Theme      | `ThemeProvider`, `useTheme`, `createTheme`, `lightTheme`, `darkTheme` |
+| Tokens     | `palette`, `radius`, `spacing`, `typography`, `motion`                |
 
 ---
 

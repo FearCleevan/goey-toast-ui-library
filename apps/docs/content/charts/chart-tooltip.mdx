@@ -1,0 +1,62 @@
+---
+title: ChartTooltip
+---
+
+# ChartTooltip & toastConfig
+
+All chart components accept a `toastConfig` prop that fires a `gooeyToast` when the user interacts with a data point (via Voronoi hover on web or press on native).
+
+## toastConfig shape
+
+```ts
+interface IChartToastConfig {
+  titleKey?: string;        // datum key to use as toast title (default: "x")
+  descriptionKey?: string;  // datum key to use as description (default: "y")
+  duration?: number;        // toast duration in ms (default: 2800)
+  prefix?: string;          // prefix before description value e.g. "$"
+  suffix?: string;          // suffix after description value e.g. "%"
+}
+```
+
+## Example
+
+```tsx
+<BarChart
+  data={salesData}
+  toastConfig={{
+    titleKey: "month",
+    descriptionKey: "revenue",
+    prefix: "$",
+    duration: 3000,
+  }}
+/>
+```
+
+When the user taps the "March" bar (value `12400`), this fires:
+
+```
+gooeyToast("March", { description: "$12400", duration: 3000 })
+```
+
+## useGooeyChartTooltip hook
+
+For advanced use — returns a `VictoryVoronoiContainer` element pre-configured for Gooey toasts:
+
+```tsx
+import { useGooeyChartTooltip } from "@gooey/charts";
+import { VictoryChart, VictoryBar } from "victory-native";
+
+function CustomChart() {
+  const container = useGooeyChartTooltip({
+    titleKey: "x",
+    descriptionKey: "y",
+    duration: 2400,
+  });
+
+  return (
+    <VictoryChart containerComponent={container}>
+      <VictoryBar data={data} />
+    </VictoryChart>
+  );
+}
+```

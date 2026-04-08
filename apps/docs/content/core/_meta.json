@@ -1,0 +1,13 @@
+{
+  "index": "Overview",
+  "gooey-toaster": "GooeyToaster",
+  "gooey-toast": "gooeyToast",
+  "theming": "Theming",
+  "button": "Button",
+  "text": "Text",
+  "input": "Input",
+  "avatar": "Avatar",
+  "badge": "Badge",
+  "card": "Card",
+  "primitives": "Layout Primitives"
+}

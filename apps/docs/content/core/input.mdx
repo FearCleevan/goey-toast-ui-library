@@ -1,0 +1,65 @@
+---
+title: Input
+---
+
+# Input
+
+A themed text input with optional label, helper text, and error state.
+
+## Usage
+
+```tsx
+import { Input } from "@gooey/core";
+import { useState } from "react";
+
+const [value, setValue] = useState("");
+
+<Input
+  label="Email"
+  placeholder="you@example.com"
+  value={value}
+  onChangeText={setValue}
+  keyboardType="email-address"
+  autoCapitalize="none"
+/>
+```
+
+## With error
+
+```tsx
+<Input
+  label="Password"
+  value={password}
+  onChangeText={setPassword}
+  secureTextEntry
+  error="Must be at least 8 characters"
+/>
+```
+
+## With helper text
+
+```tsx
+<Input
+  label="Username"
+  value={username}
+  onChangeText={setUsername}
+  helper="Letters and numbers only"
+/>
+```
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `label` | `string` | Field label rendered above the input |
+| `placeholder` | `string` | Placeholder text |
+| `value` | `string` | Controlled value |
+| `onChangeText` | `(text: string) => void` | Change handler |
+| `error` | `string` | Error message; renders input in error state |
+| `helper` | `string` | Helper text below input |
+| `secureTextEntry` | `boolean` | Password field |
+| `keyboardType` | RN `KeyboardTypeOptions` | Keyboard type |
+| `autoCapitalize` | RN `AutoCapitalize` | Capitalization behavior |
+| `autoComplete` | RN `AutoCompleteType` | Autofill hint |
+| `disabled` | `boolean` | Disable input |
+| `style` | `StyleProp<ViewStyle>` | Container style |

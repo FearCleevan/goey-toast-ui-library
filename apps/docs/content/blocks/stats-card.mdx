@@ -1,0 +1,40 @@
+---
+title: StatsCard
+---
+
+# StatsCard
+
+A metric card showing a title, value, optional percentage change badge, and optional icon.
+
+## Usage
+
+```tsx
+import { StatsCard } from "@gooey/blocks";
+
+<StatsCard
+  title="Revenue"
+  value="$24,500"
+  change={+12.4}
+  icon={<DollarIcon />}
+  onPress={() => router.push("/revenue")}
+/>
+```
+
+## Change badge
+
+The `change` prop automatically renders a `success` (green) or `error` (red) badge:
+
+```tsx
+<StatsCard title="Churn" value="2.1%" change={-0.3} />  // red badge: -0.3%
+<StatsCard title="MRR" value="$8,200" change={+5.2} />   // green badge: +5.2%
+```
+
+## Props
+
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Metric label (uppercased automatically) |
+| `value` | `string` | Primary metric value |
+| `change` | `number` | Percentage change; positive = green, negative = red |
+| `icon` | `ReactNode` | Optional icon in the top-right corner |
+| `onPress` | `() => void` | Makes the card pressable |

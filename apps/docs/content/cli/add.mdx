@@ -1,0 +1,54 @@
+---
+title: gooey add
+---
+
+# gooey add
+
+Copies a component from the registry into your project.
+
+## Usage
+
+```bash
+gooey add <component-name>
+gooey add SignInBlock
+gooey add ProductCard
+```
+
+## What it does
+
+1. Looks up the component in the registry
+2. Writes the component file to `{outputDir}/{ComponentName}.tsx`
+3. Installs peer dependencies (if any) using your package manager
+4. Adds the component name to `gooey.config.json`
+
+## Example
+
+```bash
+$ gooey add SignInBlock
+
+◆ Adding SignInBlock
+  Writing src/components/gooey/SignInBlock.tsx… ✔
+  Installing peer deps… ✔
+  ✔ SignInBlock added
+```
+
+## Options
+
+```
+gooey add --help
+```
+
+| Flag | Description |
+|---|---|
+| `--out <dir>` | Override the output directory for this run |
+| `--no-install` | Skip peer dependency installation |
+
+## Tiers
+
+Components are organized into tiers based on complexity:
+
+| Tier | Description |
+|---|---|
+| `core` | Single-file, no extra deps |
+| `composed` | Uses multiple core components |
+| `heavy` | Requires additional peer dependencies |
