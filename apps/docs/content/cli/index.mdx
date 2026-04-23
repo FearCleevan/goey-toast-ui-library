@@ -1,45 +1,104 @@
 ---
 title: "@gooey/cli"
+description: shadcn-style component installer for gooey-toast. Copy components into your project and own the code.
 ---
 
-import { Callout } from "nextra/components";
+import { Cards, Callout, Tabs, Steps } from "nextra/components";
 
 # @gooey/cli
 
-A shadcn-style component installer for goey-toast. Copy components directly into your project — own the code, customize freely.
+A shadcn-style component installer for gooey-toast. Copy components directly into your project — own the code, modify freely, no black-box abstraction.
 
-## Install
+## How to run
 
-```bash
-npm install -g @gooey/cli
-# or use npx without installing
-npx @gooey/cli init
-```
+<Tabs items={["npx (no install)", "Global install"]}>
+  <Tabs.Tab>
+  ```bash
+  npx @gooey/cli init
+  npx @gooey/cli add Button
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  npm install -g @gooey/cli
+
+  gooey init
+  gooey add Button
+  ```
+  </Tabs.Tab>
+</Tabs>
+
+---
 
 ## Commands
 
-| Command | Description |
-|---|---|
-| `gooey init` | Initialize a project — detects Expo/React Native, installs `@gooey/core`, creates `gooey.config.json` |
-| `gooey add <component>` | Copy a component into your project and install its peer deps |
-| `gooey list` | Show all available components with their tier and status |
-| `gooey diff <component>` | Diff your local copy against the current registry version |
+<Cards>
+  <Cards.Card title="gooey init" href="/cli/init" arrow>
+    Initialize your project. Detects Expo, installs `@gooey/core`, creates `gooey.config.json`, and prints the setup snippet.
+  </Cards.Card>
+  <Cards.Card title="gooey add" href="/cli/add" arrow>
+    Copy a component from the registry into your configured output directory and install its peer deps.
+  </Cards.Card>
+  <Cards.Card title="gooey list" href="/cli/list" arrow>
+    List all available components with their tier, description, and whether they are already in your project.
+  </Cards.Card>
+  <Cards.Card title="gooey diff" href="/cli/diff" arrow>
+    Diff your local copy of a component against the current registry version — useful after library updates.
+  </Cards.Card>
+</Cards>
+
+---
+
+## Quick start
+
+<Steps>
+
+### Initialize your project
+
+```bash
+npx @gooey/cli init
+```
+
+This detects your Expo SDK version and package manager, installs `@gooey/core`, and creates `gooey.config.json`.
+
+### Browse available components
+
+```bash
+gooey list
+```
+
+### Add a component
+
+```bash
+gooey add SignInBlock
+```
+
+The component source file is copied to `src/components/gooey/SignInBlock.tsx`. Peer dependencies are installed automatically.
+
+### Customize it
+
+Open the file and edit it freely. You own it — the CLI won't overwrite your changes.
+
+</Steps>
+
+---
 
 ## How it works
 
 `@gooey/cli` maintains a **registry** of component templates. When you run `gooey add`, it:
 
-1. Copies the component source file into your configured output directory
-2. Installs any required peer dependencies via your detected package manager
-3. Records the component in `gooey.config.json` so `gooey diff` can track changes
+1. Looks up the component template in the registry
+2. Copies the source file into `{outputDir}/{ComponentName}.tsx`
+3. Installs any required peer dependencies using your detected package manager
+4. Records the component in `gooey.config.json` so `gooey diff` can track drift
 
 <Callout type="info">
-  Unlike traditional packages, CLI-added components live **in your codebase**. You own the file and can modify it freely.
+  Unlike traditional npm packages, CLI-added components live **in your codebase**. You own the file and can change anything without waiting for a library update.
 </Callout>
 
 ## gooey.config.json
 
-Created by `gooey init` at the project root:
+Created by `gooey init` at your project root:
 
 ```json
 {
@@ -49,3 +108,10 @@ Created by `gooey init` at the project root:
   "components": ["SignInBlock", "ProductCard"]
 }
 ```
+
+| Field | Description |
+|---|---|
+| `outputDir` | Directory where component files are copied |
+| `packageManager` | Auto-detected: `pnpm`, `npm`, `yarn`, or `bun` |
+| `expo` | Whether the project uses Expo (affects install commands) |
+| `components` | List of components added to track drift with `gooey diff` |

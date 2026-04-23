@@ -1,35 +1,60 @@
 ---
 title: Theming
+description: Design tokens, createTheme, useTheme, and the full token reference.
 ---
 
-import { Callout } from "nextra/components";
+import { Callout, Cards, Tabs } from "nextra/components";
 
 # Theming
 
-All goey-toast components read from a shared `ITheme` object. The theme provides colors, spacing, radius, typography, motion, and shadow tokens.
+Every gooey-toast component reads from a shared `ITheme` object. The theme provides tokens for colors, spacing, radius, typography, motion, and shadows. You can use the built-in light or dark theme, or create a fully custom one.
+
+---
 
 ## Built-in themes
 
-```tsx
-import { lightTheme, darkTheme } from "@gooey/core";
+<Tabs items={["Light (default)", "Dark"]}>
+  <Tabs.Tab>
+  ```tsx
+  import { ThemeProvider, lightTheme } from "@gooey/core";
 
-<ThemeProvider theme={darkTheme}>
-  {/* ... */}
-</ThemeProvider>
-```
+  // lightTheme is the default — you can omit the theme prop
+  <ThemeProvider theme={lightTheme}>
+    {/* ... */}
+  </ThemeProvider>
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```tsx
+  import { ThemeProvider, darkTheme } from "@gooey/core";
+
+  <ThemeProvider theme={darkTheme}>
+    {/* ... */}
+  </ThemeProvider>
+  ```
+  </Tabs.Tab>
+</Tabs>
+
+---
 
 ## Create a custom theme
 
-`createTheme` deep-merges your overrides with `lightTheme`:
+`createTheme` deep-merges your overrides into `lightTheme`. Only the keys you provide are changed — everything else inherits from the base.
 
 ```tsx
-import { createTheme, ThemeProvider } from "@gooey/core";
+import { ThemeProvider, createTheme } from "@gooey/core";
 
 const brandTheme = createTheme({
   colors: {
-    primary: "#6C47FF",
-    background: "#0D0D0D",
-    foreground: "#F5F5F5",
+    primary: "#7C3AED",
+    background: "#09090B",
+    foreground: "#FAFAFA",
+    card: "#18181B",
+    border: "#27272A",
+  },
+  radius: {
+    md: 12,
+    lg: 16,
   },
 });
 
@@ -38,27 +63,40 @@ const brandTheme = createTheme({
 </ThemeProvider>
 ```
 
+<Callout type="info">
+  `createTheme` always starts from `lightTheme`. To extend `darkTheme`, spread it first: `createTheme({ ...darkTheme, colors: { ...darkTheme.colors, primary: "#7C3AED" } })`.
+</Callout>
+
+---
+
 ## useTheme
 
-Access design tokens inside any component:
+Access design tokens inside any component wrapped in `ThemeProvider`:
 
 ```tsx
 import { useTheme } from "@gooey/core";
+import { View, StyleSheet } from "react-native";
 
 function MyCard() {
   const theme = useTheme();
 
   return (
-    <View style={{
-      backgroundColor: theme.colors.card,
-      borderRadius: theme.radius.xl,
-      padding: theme.spacing[4],
-    }}>
+    <View
+      style={{
+        backgroundColor: theme.colors.card,
+        borderColor: theme.colors.border,
+        borderWidth: 1,
+        borderRadius: theme.radius.xl,
+        padding: theme.spacing[4],
+      }}
+    >
       {/* ... */}
     </View>
   );
 }
 ```
+
+---
 
 ## Token reference
 
@@ -72,35 +110,70 @@ function MyCard() {
 | `colors.border` | `#E4E4E7` | `#27272A` |
 | `colors.muted` | `#F4F4F5` | `#27272A` |
 | `colors.mutedForeground` | `#71717A` | `#A1A1AA` |
+| `colors.primary` | `#7C3AED` | `#7C3AED` |
 
 ### Spacing
 
-Spacing uses a 4px base scale — `theme.spacing[1]` = `4px`, `theme.spacing[4]` = `16px`, `theme.spacing[8]` = `32px`.
+Spacing uses a **4 px base scale**:
+
+| Token | Value |
+|---|---|
+| `spacing[1]` | 4 px |
+| `spacing[2]` | 8 px |
+| `spacing[3]` | 12 px |
+| `spacing[4]` | 16 px |
+| `spacing[6]` | 24 px |
+| `spacing[8]` | 32 px |
+| `spacing[12]` | 48 px |
+| `spacing[16]` | 64 px |
 
 ### Radius
 
-```ts
-theme.radius.sm   // 4
-theme.radius.md   // 8
-theme.radius.lg   // 12
-theme.radius.xl   // 16
-theme.radius["2xl"] // 20
-theme.radius["3xl"] // 24
-theme.radius.full // 9999
-```
+| Token | Value |
+|---|---|
+| `radius.sm` | 4 |
+| `radius.md` | 8 |
+| `radius.lg` | 12 |
+| `radius.xl` | 16 |
+| `radius["2xl"]` | 20 |
+| `radius["3xl"]` | 24 |
+| `radius.full` | 9999 |
 
 ### Palette
 
-The full color palette (`palette`) is exported as a flat object:
+The full color palette is exported as a **flat** object — use `palette.blue600`, not `palette.blue[600]`:
 
 ```ts
 import { palette } from "@gooey/core";
 
-palette.blue600   // "#2563EB"
-palette.slate200  // "#E2E8F0"
-palette.green500  // "#22C55E"
+palette.blue600    // "#2563EB"
+palette.violet500  // "#8B5CF6"
+palette.green500   // "#22C55E"
+palette.red500     // "#EF4444"
+palette.amber400   // "#FBBF24"
+palette.slate200   // "#E2E8F0"
 ```
 
-<Callout type="info">
-  The palette is a **flat** object — use `palette.blue600`, not `palette.blue[600]`.
-</Callout>
+### Motion
+
+```ts
+theme.motion.duration.fast    // 150 ms
+theme.motion.duration.normal  // 300 ms
+theme.motion.duration.slow    // 500 ms
+
+theme.motion.easing.spring    // Reanimated spring config
+theme.motion.easing.ease      // cubic-bezier easing
+```
+
+---
+
+## See also
+
+<Cards>
+  <Cards.Card title="GooeyToaster" href="/core/gooey-toaster" arrow>
+    Pass a per-toaster theme override independent of ThemeProvider.
+  </Cards.Card>
+  <Cards.Card title="Layout Primitives" href="/core/primitives" arrow>
+    Using theme tokens with Box, HStack, and VStack.
+  </Cards.Card>
+</Cards>

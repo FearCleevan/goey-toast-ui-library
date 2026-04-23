@@ -1,33 +1,104 @@
 ---
 title: "@gooey/blocks"
+description: Pre-built screen compositions for auth, onboarding, dashboard, e-commerce, and settings.
 ---
+
+import { Cards, Callout, Tabs } from "nextra/components";
 
 # @gooey/blocks
 
-Pre-built screen compositions for common mobile app patterns — auth, onboarding, dashboard, e-commerce, and settings.
+Pre-built screen compositions for the most common mobile app flows. Every block is built from `@gooey/core` primitives and fires `gooeyToast` feedback automatically.
 
 ## Install
 
-```bash
-pnpm add @gooey/blocks @gooey/core
-```
+<Tabs items={["pnpm", "npm", "yarn", "bun"]}>
+  <Tabs.Tab>
+  ```bash
+  pnpm add @gooey/blocks @gooey/core
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  npm install @gooey/blocks @gooey/core
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  yarn add @gooey/blocks @gooey/core
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  bun add @gooey/blocks @gooey/core
+  ```
+  </Tabs.Tab>
+</Tabs>
 
-All blocks are built exclusively from `@gooey/core` primitives and integrate `gooeyToast` feedback automatically.
+<Callout type="info">
+  All blocks peer-depend on `@gooey/core`. Make sure it is installed and `ThemeProvider` wraps your app before using any block.
+</Callout>
 
-## Categories
+---
 
-| Category | Blocks |
-|---|---|
-| **Auth** | `SignInBlock`, `SignUpBlock` |
-| **Onboarding** | `OnboardingFlow` |
-| **Dashboard** | `StatsCard`, `ActivityFeed` |
-| **E-commerce** | `ProductCard`, `CartItem` |
-| **Settings** | `SettingsGroup`, `ProfileHeader` |
+## Auth
 
-## disableToast prop
+<Cards>
+  <Cards.Card title="SignInBlock" href="/blocks/sign-in" arrow>
+    Complete sign-in form with email/password fields, loading state, forgot password and sign-up links, and automatic toast feedback.
+  </Cards.Card>
+  <Cards.Card title="SignUpBlock" href="/blocks/sign-up" arrow>
+    Full sign-up form with name, email, and password. Validates required fields and minimum password length before calling your handler.
+  </Cards.Card>
+</Cards>
 
-Every block that fires toasts accepts a `disableToast` prop. Set it to `true` to suppress all automatic `gooeyToast` calls (useful in tests or when you want full control):
+## Onboarding
+
+<Cards>
+  <Cards.Card title="OnboardingFlow" href="/blocks/onboarding" arrow>
+    Paginated onboarding slides with animated pagination dots, illustration slots, per-slide accent colors, and an optional skip button.
+  </Cards.Card>
+</Cards>
+
+## Dashboard
+
+<Cards>
+  <Cards.Card title="StatsCard" href="/blocks/stats-card" arrow>
+    Metric card with title, value, percentage-change badge (auto green/red), and optional icon.
+  </Cards.Card>
+  <Cards.Card title="ActivityFeed" href="/blocks/activity-feed" arrow>
+    Scrollable list of timestamped activity rows with type-colored dot indicators, optional badges, and toast-on-press feedback.
+  </Cards.Card>
+</Cards>
+
+## E-commerce
+
+<Cards>
+  <Cards.Card title="ProductCard" href="/blocks/product-card" arrow>
+    Product card with image, name, price, optional sale price, badge, and "Add to cart" button with built-in toast feedback.
+  </Cards.Card>
+  <Cards.Card title="CartItem" href="/blocks/cart-item" arrow>
+    Shopping cart row with quantity stepper and remove button. Fires a warning toast on removal.
+  </Cards.Card>
+</Cards>
+
+## Settings
+
+<Cards>
+  <Cards.Card title="SettingsGroup" href="/blocks/settings-group" arrow>
+    Grouped settings section as a Card. Supports navigate (chevron), toggle (Switch), and info (display-only) row types.
+  </Cards.Card>
+  <Cards.Card title="ProfileHeader" href="/blocks/profile-header" arrow>
+    User profile header with avatar, name, username, optional edit button, and a stats row for followers, posts, etc.
+  </Cards.Card>
+</Cards>
+
+---
+
+## Suppressing toasts
+
+Every block that fires toasts accepts a `disableToast` prop. Set it to suppress all automatic `gooeyToast` calls — useful during testing or when you want full control over feedback:
 
 ```tsx
 <SignInBlock onSignIn={handleSignIn} disableToast />
+<ProductCard onAddToCart={addToCart} disableToast />
 ```

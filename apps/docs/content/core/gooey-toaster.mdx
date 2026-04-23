@@ -1,58 +1,120 @@
 ---
 title: GooeyToaster
+description: The morphing blob toast overlay. Mount once at your app root.
 ---
 
-import { Callout } from "nextra/components";
+import { Callout, Cards, Tabs } from "nextra/components";
 
 # GooeyToaster
 
-The `GooeyToaster` renders the morphing blob toast overlay. Place it **once** near the root of your app, inside `ThemeProvider`.
+The `GooeyToaster` renders the morphing blob toast overlay. It manages the toast queue, stack position, auto-dismiss timers, and the pill-to-card animation. Place it **once** near the root of your app, inside `ThemeProvider`.
 
-```tsx
+```tsx filename="app/_layout.tsx"
 import { ThemeProvider, GooeyToaster } from "@gooey/core";
 
-export default function App() {
+export default function RootLayout({ children }) {
   return (
     <ThemeProvider>
-      <YourApp />
+      {children}
       <GooeyToaster />
     </ThemeProvider>
   );
 }
 ```
 
-<Callout>
-  Only mount one `GooeyToaster` per app. Multiple instances will cause duplicate toasts.
+<Callout type="error">
+  Mount **only one** `GooeyToaster` per app. Multiple instances will produce duplicate toasts.
 </Callout>
+
+---
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `position` | `TGooeyToastPosition` | `"bottom-center"` | Where toasts appear on screen |
-| `maxToasts` | `number` | `3` | Max visible toasts at once |
-| `defaultDuration` | `number` | `4000` | Auto-dismiss time in ms |
-| `defaultShowTimestamp` | `boolean` | `false` | Show elapsed time on toasts |
-| `theme` | `ITheme` | inherited | Override the theme for toasts only |
+| `maxToasts` | `number` | `3` | Maximum visible toasts in the stack at once |
+| `defaultDuration` | `number` | `4000` | Auto-dismiss time in milliseconds |
+| `defaultShowTimestamp` | `boolean` | `false` | Show elapsed time label on each toast |
+| `theme` | `ITheme` | inherited | Override the theme for toasts only — independent of `ThemeProvider` |
 
 ## Position values
 
 ```ts
 type TGooeyToastPosition =
-  | "top-left" | "top-center" | "top-right"
-  | "bottom-left" | "bottom-center" | "bottom-right";
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"   // default
+  | "bottom-right";
 ```
+
+---
 
 ## Examples
 
-### Custom position
+### Position
+
+<Tabs items={["bottom-center", "top-right", "top-center"]}>
+  <Tabs.Tab>
+  ```tsx
+  <GooeyToaster position="bottom-center" />
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```tsx
+  <GooeyToaster position="top-right" />
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```tsx
+  <GooeyToaster position="top-center" />
+  ```
+  </Tabs.Tab>
+</Tabs>
+
+### Stack limit and duration
 
 ```tsx
-<GooeyToaster position="top-center" />
-```
-
-### Limit stack height
-
-```tsx
+// Show up to 5 toasts, dismiss after 3 seconds
 <GooeyToaster maxToasts={5} defaultDuration={3000} />
 ```
+
+### Persistent toasts (no auto-dismiss)
+
+Set `defaultDuration={Infinity}` to disable auto-dismiss globally. Individual toasts can still override with their own `duration` option.
+
+```tsx
+<GooeyToaster defaultDuration={Infinity} />
+
+// This specific toast will still auto-dismiss after 4s:
+gooeyToast.success("Saved!", { duration: 4000 });
+```
+
+### Toast-only theme override
+
+You can style toasts differently from the rest of your app:
+
+```tsx
+import { GooeyToaster, createTheme } from "@gooey/core";
+
+const darkToastTheme = createTheme({
+  colors: { background: "#09090B", foreground: "#FAFAFA" },
+});
+
+<GooeyToaster theme={darkToastTheme} />
+```
+
+---
+
+## See also
+
+<Cards>
+  <Cards.Card title="gooeyToast API" href="/core/gooey-toast" arrow>
+    All toast methods — success, error, promise, update, dismiss.
+  </Cards.Card>
+  <Cards.Card title="Theming" href="/core/theming" arrow>
+    How to pass custom themes and use design tokens.
+  </Cards.Card>
+</Cards>

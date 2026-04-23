@@ -1,70 +1,135 @@
 ---
 title: Button
+description: Pressable button with solid, outline, and ghost variants, loading state, and icon slots.
 ---
+
+import { Tabs, Callout, Cards } from "nextra/components";
 
 # Button
 
-A pressable button with variants, sizes, loading state, and icon slots.
+A pressable button with animated press feedback, three visual variants, three size presets, loading state, icon slots, and full theme integration.
 
 ## Usage
 
 ```tsx
 import { Button } from "@gooey/core";
 
-<Button onPress={() => console.log("pressed")}>
-  Save changes
-</Button>
+<Button onPress={() => save()}>Save changes</Button>
 ```
+
+---
 
 ## Variants
 
-```tsx
-<Button variant="solid">Solid (default)</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
-```
+<Tabs items={["solid", "outline", "ghost"]}>
+  <Tabs.Tab>
+  ```tsx
+  // Primary filled button — uses theme primary color
+  <Button variant="solid" onPress={handlePress}>
+    Get Started
+  </Button>
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```tsx
+  // Bordered button with transparent background
+  <Button variant="outline" onPress={handlePress}>
+    Learn More
+  </Button>
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```tsx
+  // No border or background — text only
+  <Button variant="ghost" onPress={handlePress}>
+    Cancel
+  </Button>
+  ```
+  </Tabs.Tab>
+</Tabs>
 
 ## Sizes
 
 ```tsx
 <Button size="sm">Small</Button>
-<Button size="md">Medium</Button>
+<Button size="md">Medium</Button>  {/* default */}
 <Button size="lg">Large</Button>
 ```
 
 ## Loading state
 
+The button shows a spinner and disables interaction while `loading` is true:
+
 ```tsx
-<Button loading>Saving…</Button>
+const [saving, setSaving] = useState(false);
+
+<Button
+  loading={saving}
+  onPress={async () => {
+    setSaving(true);
+    await save();
+    setSaving(false);
+  }}
+>
+  Save changes
+</Button>
 ```
 
 ## Icons
 
 ```tsx
-import { PlusIcon } from "your-icon-library";
+import { PlusIcon, ChevronRightIcon } from "your-icon-library";
 
-<Button leftIcon={<PlusIcon />}>Add item</Button>
-<Button rightIcon={<ChevronRightIcon />}>Next</Button>
+<Button leftIcon={<PlusIcon size={16} />}>Add item</Button>
+<Button rightIcon={<ChevronRightIcon size={16} />}>Next</Button>
 ```
 
 ## Custom color
 
+Override the button's primary color independently of the theme:
+
 ```tsx
-<Button color="#6C47FF">Brand action</Button>
+<Button color="#7C3AED">Brand action</Button>
+<Button color="#10B981" variant="solid">Success action</Button>
 ```
+
+<Callout type="info">
+  `color` overrides the background for `solid` buttons and the border/text color for `outline` and `ghost` buttons.
+</Callout>
+
+## Disabled
+
+```tsx
+<Button disabled>Unavailable</Button>
+```
+
+---
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `children` | `ReactNode` | — | Button label content |
+| `children` | `ReactNode` | — | Button label |
 | `variant` | `"solid" \| "outline" \| "ghost"` | `"solid"` | Visual style |
 | `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size preset |
-| `color` | `string` | — | Override background/text color |
+| `color` | `string` | — | Override the accent color |
 | `loading` | `boolean` | `false` | Show spinner, disable interaction |
 | `disabled` | `boolean` | `false` | Disable interaction |
-| `leftIcon` | `ReactNode` | — | Icon before label |
-| `rightIcon` | `ReactNode` | — | Icon after label |
+| `leftIcon` | `ReactNode` | — | Icon before the label |
+| `rightIcon` | `ReactNode` | — | Icon after the label |
 | `onPress` | `() => void` | — | Press handler |
 | `style` | `StyleProp<ViewStyle>` | — | Container style override |
 | `accessibilityLabel` | `string` | — | Screen reader label |
+
+---
+
+## See also
+
+<Cards>
+  <Cards.Card title="IconButton" href="/core" arrow>
+    Icon-only pressable button with the same variant and size system.
+  </Cards.Card>
+  <Cards.Card title="Theming" href="/core/theming" arrow>
+    Customize `colors.primary` to change the default button color globally.
+  </Cards.Card>
+</Cards>

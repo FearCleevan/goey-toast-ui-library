@@ -1,33 +1,99 @@
 ---
 title: "@gooey/charts"
+description: Themed chart components for React Native built on Victory Native.
 ---
 
-import { Callout } from "nextra/components";
+import { Cards, Callout, Tabs } from "nextra/components";
 
 # @gooey/charts
 
-Themed chart components for React Native, built on [Victory Native](https://commerce.nearform.com/open-source/victory-native/).
+Five themed chart components for React Native, built on [Victory Native](https://commerce.nearform.com/open-source/victory-native/). All charts inherit your design system colors automatically — zero extra config.
 
 ## Install
 
-```bash
-npx expo install @gooey/charts victory-native react-native-svg
-```
+<Tabs items={["Expo", "pnpm", "npm", "yarn"]}>
+  <Tabs.Tab>
+  ```bash
+  npx expo install @gooey/charts victory-native react-native-svg
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  pnpm add @gooey/charts victory-native react-native-svg
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  npm install @gooey/charts victory-native react-native-svg
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  yarn add @gooey/charts victory-native react-native-svg
+  ```
+  </Tabs.Tab>
+</Tabs>
 
 <Callout type="info">
-  `@gooey/charts` uses the **SVG-based** Victory Native API (`victory-native@^36`). It does not require Skia or the new XL API.
+  `@gooey/charts` uses the **SVG-based** Victory Native API (`victory-native ≥ 36`). It does **not** require Skia or the Victory Native XL API.
 </Callout>
 
-## Available charts
+---
 
-| Component | Description |
-|---|---|
-| `BarChart` | Vertical bar chart with optional tooltip |
-| `LineChart` | Line chart with scatter points |
-| `AreaChart` | Filled area chart |
-| `PieChart` | Slice-based pie chart |
-| `DonutChart` | Donut variant with center label |
+## Charts
+
+<Cards>
+  <Cards.Card title="BarChart" href="/charts/bar-chart" arrow>
+    Vertical bar chart with themed axes, gridlines, and optional press/toast interaction. Pass `{ x, y }` data points.
+  </Cards.Card>
+  <Cards.Card title="LineChart" href="/charts/line-chart" arrow>
+    Smooth line chart with scatter points and optional Voronoi tooltip. Great for time-series data.
+  </Cards.Card>
+  <Cards.Card title="AreaChart" href="/charts/area-chart" arrow>
+    Filled area chart for cumulative totals and trends over time. Configurable fill opacity.
+  </Cards.Card>
+  <Cards.Card title="PieChart" href="/charts/pie-chart" arrow>
+    Slice-based pie chart with auto-colored segments from the Gooey palette. Supports press callbacks.
+  </Cards.Card>
+  <Cards.Card title="DonutChart" href="/charts/donut-chart" arrow>
+    Donut variant with an optional center label — ideal for showing a primary metric with breakdown.
+  </Cards.Card>
+  <Cards.Card title="ChartTooltip" href="/charts/chart-tooltip" arrow>
+    The `toastConfig` prop and `useGooeyChartTooltip` hook for wiring gooeyToast to any data point interaction.
+  </Cards.Card>
+</Cards>
+
+---
 
 ## Theming
 
-All charts read from `@gooey/core`'s theme automatically — no extra config needed. Colors come from `theme.colors.toast.*` icon values (info, success, warning, error) plus extended palette entries.
+Charts auto-read colors from `@gooey/core`'s theme. No extra configuration is needed.
+
+```tsx
+import { BarChart } from "@gooey/charts";
+
+// Uses your active theme colors automatically
+<BarChart data={data} height={240} />
+
+// Or override a specific color
+<BarChart data={data} height={240} color="#7C3AED" />
+```
+
+## Toast integration
+
+Every chart accepts a `toastConfig` prop that fires a `gooeyToast` when the user taps a data point:
+
+```tsx
+<BarChart
+  data={salesData}
+  height={240}
+  toastConfig={{
+    titleKey: "month",
+    descriptionKey: "revenue",
+    prefix: "$",
+    duration: 3000,
+  }}
+/>
+```
+
+See [ChartTooltip](/charts/chart-tooltip) for the full config reference.

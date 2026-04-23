@@ -1,18 +1,107 @@
 ---
 title: "@gooey/core"
+description: Toast system, theming engine, and 20+ animated React Native components.
 ---
+
+import { Cards, Callout, Tabs } from "nextra/components";
 
 # @gooey/core
 
-The foundation package. Includes the toast system, theming engine, and 20+ React Native components.
+The foundation package. Includes the morphing blob toast system, a full theming engine, and 20+ production-ready React Native components.
 
 ## Install
 
-```bash
-npx expo install @gooey/core react-native-reanimated
-```
+<Tabs items={["Expo", "pnpm", "npm", "yarn"]}>
+  <Tabs.Tab>
+  ```bash
+  npx expo install @gooey/core react-native-reanimated react-native-gesture-handler react-native-svg react-native-safe-area-context
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  pnpm add @gooey/core
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  npm install @gooey/core
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```bash
+  yarn add @gooey/core
+  ```
+  </Tabs.Tab>
+</Tabs>
 
-## What's included
+<Callout type="info">
+  Peer dependencies: `react-native-reanimated ≥ 3`, `react-native-gesture-handler ≥ 2`, `react-native-svg ≥ 15`, `react-native-safe-area-context ≥ 4`.
+</Callout>
+
+---
+
+## Toast System
+
+<Cards>
+  <Cards.Card title="GooeyToaster" href="/core/gooey-toaster" arrow>
+    The morphing blob overlay. Mount once at your app root. Configure position, max stack, and auto-dismiss duration.
+  </Cards.Card>
+  <Cards.Card title="gooeyToast" href="/core/gooey-toast" arrow>
+    Imperative API — `.success()`, `.error()`, `.warning()`, `.promise()`, `.update()`, `.dismiss()`. No hooks needed.
+  </Cards.Card>
+</Cards>
+
+## Theming
+
+<Cards>
+  <Cards.Card title="Theming & Design Tokens" href="/core/theming" arrow>
+    `createTheme`, `useTheme`, `lightTheme`, `darkTheme`. Full token reference for colors, spacing, radius, and motion.
+  </Cards.Card>
+</Cards>
+
+---
+
+## Components
+
+### Inputs & Actions
+
+<Cards>
+  <Cards.Card title="Button" href="/core/button" arrow>
+    Solid, outline, and ghost variants. Sizes sm / md / lg. Loading state, icon slots, and custom color.
+  </Cards.Card>
+  <Cards.Card title="Input" href="/core/input" arrow>
+    Themed text input with label, helper text, error state, and all native keyboard props.
+  </Cards.Card>
+</Cards>
+
+### Display
+
+<Cards>
+  <Cards.Card title="Avatar" href="/core/avatar" arrow>
+    Image with graceful initials fallback. Six size presets from `xs` to `2xl`.
+  </Cards.Card>
+  <Cards.Card title="Badge" href="/core/badge" arrow>
+    Status labels in `success`, `error`, `warning`, `info`, and `neutral` variants. Dot mode for presence indicators.
+  </Cards.Card>
+  <Cards.Card title="Card" href="/core/card" arrow>
+    Themed surface container with border, radius, and optional press handling.
+  </Cards.Card>
+  <Cards.Card title="Text" href="/core/text" arrow>
+    Typography primitive mapping size and weight tokens directly to the design system scale.
+  </Cards.Card>
+</Cards>
+
+### Layout
+
+<Cards>
+  <Cards.Card title="Layout Primitives" href="/core/primitives" arrow>
+    `HStack`, `VStack`, `Box`, and `Divider` — the building blocks for every screen.
+  </Cards.Card>
+</Cards>
+
+---
+
+## Full export reference
 
 | Category | Exports |
 |---|---|
@@ -24,5 +113,4 @@ npx expo install @gooey/core react-native-reanimated
 | **Display** | `Avatar`, `Badge`, `Card`, `Chip`, `Alert` |
 | **Overlays** | `Modal`, `BottomSheet` |
 | **Feedback** | `Skeleton` |
-| **Motion** | `motion` config object |
-| **Tokens** | `palette`, `radius`, `spacing`, `typography` |
+| **Tokens** | `palette`, `radius`, `spacing`, `typography`, `motion` |

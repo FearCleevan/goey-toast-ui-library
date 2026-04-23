@@ -1,48 +1,84 @@
 ---
 title: gooeyToast
+description: Imperative API for firing toasts from anywhere — no hooks, no context required.
 ---
+
+import { Callout, Cards, Tabs } from "nextra/components";
 
 # gooeyToast
 
-The imperative API for firing toasts from anywhere — no hooks, no context required.
+The imperative API for firing toasts from anywhere in your app — no hooks, no context, no component wiring required. Each call returns the toast `id` (`string`) which you can use to update or dismiss it later.
+
+```ts
+import { gooeyToast } from "@gooey/core";
+```
+
+---
 
 ## Methods
 
 ```ts
-gooeyToast(title, options?)           // default (info) toast
+gooeyToast(title, options?)            // default (info) variant
 gooeyToast.success(title, options?)
 gooeyToast.error(title, options?)
 gooeyToast.warning(title, options?)
 gooeyToast.info(title, options?)
 gooeyToast.promise(promise, messages)
 gooeyToast.update(id, options)
-gooeyToast.dismiss(id?)              // dismiss one or all
+gooeyToast.dismiss(id?)               // omit id to dismiss all
 ```
 
-Each call returns the toast `id` (string).
+---
 
 ## Options
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `description` | `string` | — | Secondary text below the title |
-| `duration` | `number` | `4000` | Auto-dismiss in ms. `Infinity` to persist |
-| `icon` | `ReactNode` | — | Custom icon, replaces the type icon |
-| `action` | `{ label, onPress }` | — | Action button shown on the toast |
+| `description` | `string` | — | Secondary text rendered below the title |
+| `duration` | `number` | `4000` | Auto-dismiss in ms. Pass `Infinity` to persist until manually dismissed |
+| `icon` | `ReactNode` | — | Custom icon that replaces the type icon |
+| `action` | `{ label: string; onPress: () => void }` | — | Action button shown on the toast |
 | `dismissible` | `boolean` | `true` | Whether the user can swipe to dismiss |
 | `showTimestamp` | `boolean` | `false` | Show elapsed time label |
-| `id` | `string` | auto | Provide a fixed ID to deduplicate |
+| `id` | `string` | auto | Fixed ID for deduplication — calling again with the same ID updates the existing toast |
+
+---
 
 ## Examples
 
 ### Basic variants
 
-```ts
-gooeyToast.success("Saved!");
-gooeyToast.error("Something went wrong", { description: "Check your network." });
-gooeyToast.warning("Low storage", { duration: 6000 });
-gooeyToast.info("Update available");
-```
+<Tabs items={["success", "error", "warning", "info"]}>
+  <Tabs.Tab>
+  ```ts
+  gooeyToast.success("Saved!", {
+    description: "Your changes have been saved.",
+  });
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```ts
+  gooeyToast.error("Upload failed", {
+    description: "Check your connection and try again.",
+  });
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```ts
+  gooeyToast.warning("Low storage", {
+    description: "Only 2 GB remaining.",
+    duration: 6000,
+  });
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```ts
+  gooeyToast.info("New version available", {
+    description: "Update to v1.2.0 for the latest features.",
+  });
+  ```
+  </Tabs.Tab>
+</Tabs>
 
 ### With action button
 
@@ -59,6 +95,8 @@ gooeyToast("File deleted", {
 
 ### Promise toast
 
+Automatically transitions through `loading → success | error` states:
+
 ```ts
 gooeyToast.promise(uploadFile(), {
   loading: "Uploading…",
@@ -67,20 +105,57 @@ gooeyToast.promise(uploadFile(), {
 });
 ```
 
+<Callout type="info">
+  The `success` and `error` fields accept either a string or a function that receives the resolved/rejected value and returns a string.
+</Callout>
+
 ### Update an existing toast
 
 ```ts
+// Fire a persistent toast and hold its id
 const id = gooeyToast("Processing…", { duration: Infinity });
 
-// later…
-gooeyToast.update(id, { title: "Done!", type: "success", duration: 3000 });
+// Later — update it in place
+gooeyToast.update(id, {
+  title: "Done!",
+  type: "success",
+  duration: 3000,
+});
+```
+
+### Deduplication with fixed id
+
+Calling `gooeyToast` with the same `id` updates the toast rather than creating a new one — useful for debounced events:
+
+```ts
+gooeyToast.error("Network error", {
+  id: "network-error",
+  description: "Retrying…",
+  duration: Infinity,
+});
+
+// Calling again with the same id → updates existing toast, no duplicate
+gooeyToast.error("Network error", { id: "network-error" });
 ```
 
 ### Dismiss
 
 ```ts
 const id = gooeyToast.info("Running…", { duration: Infinity });
-gooeyToast.dismiss(id);   // dismiss one
 
-gooeyToast.dismiss();     // dismiss all
+gooeyToast.dismiss(id);  // dismiss one toast
+gooeyToast.dismiss();    // dismiss all toasts
 ```
+
+---
+
+## See also
+
+<Cards>
+  <Cards.Card title="GooeyToaster" href="/core/gooey-toaster" arrow>
+    Mount the overlay, configure position, stack size, and default duration.
+  </Cards.Card>
+  <Cards.Card title="ChartTooltip" href="/charts/chart-tooltip" arrow>
+    Using gooeyToast with chart data-point interactions.
+  </Cards.Card>
+</Cards>

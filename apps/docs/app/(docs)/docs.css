@@ -1,0 +1,123 @@
+/* ─── Gooey Toast — Nextra docs theme overrides ────────────────────────── */
+
+/* Navbar logo */
+.docs-nav-logo {
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+/* Primary color: violet/purple hue instead of default blue */
+:root {
+  --nextra-primary-hue: 262deg;
+  --nextra-primary-saturation: 83%;
+}
+
+/* ─── Sidebar active item ────────────────────────────────────────────────── */
+/* Ensure active sidebar link uses our purple */
+.nextra-sidebar li a[aria-current="page"],
+.nextra-sidebar li a.active {
+  color: #a78bfa !important;
+}
+
+/* ─── Props table styling ────────────────────────────────────────────────── */
+/* Tighten the default table and make it easier to read */
+article table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+
+article table th {
+  text-align: left;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--nextra-border-color, #e4e4e7);
+  white-space: nowrap;
+  color: var(--nextra-color-primary-800, #5b21b6);
+}
+
+:is(html[class~="dark"]) article table th {
+  border-bottom-color: #27272a;
+  color: #a78bfa;
+}
+
+article table td {
+  padding: 10px 14px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--nextra-border-color, #f4f4f5);
+  line-height: 1.55;
+}
+
+:is(html[class~="dark"]) article table td {
+  border-bottom-color: #1c1c1f;
+}
+
+article table td code,
+article table th code {
+  font-size: 12.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(124, 58, 237, 0.08);
+  color: #7c3aed;
+}
+
+:is(html[class~="dark"]) article table td code,
+:is(html[class~="dark"]) article table th code {
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
+}
+
+/* ─── Callout refinements ────────────────────────────────────────────────── */
+.nextra-callout {
+  border-radius: 10px;
+}
+
+/* ─── Inline code ────────────────────────────────────────────────────────── */
+article :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+/* ─── Code block filename tab ────────────────────────────────────────────── */
+.nextra-code-block > div[data-language] {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ─── Steps numbering accent ─────────────────────────────────────────────── */
+.nextra-steps h3::before {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5) !important;
+  color: #fff !important;
+}
+
+/* ─── Cards hover ────────────────────────────────────────────────────────── */
+.nextra-cards a {
+  transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+}
+
+.nextra-cards a:hover {
+  border-color: rgba(124, 58, 237, 0.5) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* ─── Scrollbar (webkit) ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
